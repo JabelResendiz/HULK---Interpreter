@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "Interpreter.Visual/1.0.0": {
+        "dependencies": {
+          "Interpreter.Logic": "1.0.0"
+        },
+        "runtime": {
+          "Interpreter.Visual.dll": {}
+        }
+      },
+      "Interpreter.Logic/1.0.0": {
+        "runtime": {
+          "Interpreter.Logic.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Interpreter.Visual/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Interpreter.Logic/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
