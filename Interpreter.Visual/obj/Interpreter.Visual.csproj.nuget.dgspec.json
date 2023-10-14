@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HP\\Documents\\Interpreter-of-Dy.X-main\\Interpreter.Visual\\Interpreter.Visual.csproj": {}
+    "C:\\Users\\HP\\Documents\\HULK Interpreter\\Interpreter.Visual\\Interpreter.Visual.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HP\\Documents\\Interpreter-of-Dy.X-main\\Interpreter.Logic\\Interpreter.Logic.csproj": {
+    "C:\\Users\\HP\\Documents\\HULK Interpreter\\Interpreter.Logic\\Interpreter.Logic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\Documents\\Interpreter-of-Dy.X-main\\Interpreter.Logic\\Interpreter.Logic.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\Documents\\HULK Interpreter\\Interpreter.Logic\\Interpreter.Logic.csproj",
         "projectName": "Interpreter.Logic",
-        "projectPath": "C:\\Users\\HP\\Documents\\Interpreter-of-Dy.X-main\\Interpreter.Logic\\Interpreter.Logic.csproj",
+        "projectPath": "C:\\Users\\HP\\Documents\\HULK Interpreter\\Interpreter.Logic\\Interpreter.Logic.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\Documents\\Interpreter-of-Dy.X-main\\Interpreter.Logic\\obj\\",
+        "outputPath": "C:\\Users\\HP\\Documents\\HULK Interpreter\\Interpreter.Logic\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -57,14 +57,14 @@
         }
       }
     },
-    "C:\\Users\\HP\\Documents\\Interpreter-of-Dy.X-main\\Interpreter.Visual\\Interpreter.Visual.csproj": {
+    "C:\\Users\\HP\\Documents\\HULK Interpreter\\Interpreter.Visual\\Interpreter.Visual.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\Documents\\Interpreter-of-Dy.X-main\\Interpreter.Visual\\Interpreter.Visual.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\Documents\\HULK Interpreter\\Interpreter.Visual\\Interpreter.Visual.csproj",
         "projectName": "Interpreter.Visual",
-        "projectPath": "C:\\Users\\HP\\Documents\\Interpreter-of-Dy.X-main\\Interpreter.Visual\\Interpreter.Visual.csproj",
+        "projectPath": "C:\\Users\\HP\\Documents\\HULK Interpreter\\Interpreter.Visual\\Interpreter.Visual.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\Documents\\Interpreter-of-Dy.X-main\\Interpreter.Visual\\obj\\",
+        "outputPath": "C:\\Users\\HP\\Documents\\HULK Interpreter\\Interpreter.Visual\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -79,8 +79,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\HP\\Documents\\Interpreter-of-Dy.X-main\\Interpreter.Logic\\Interpreter.Logic.csproj": {
-                "projectPath": "C:\\Users\\HP\\Documents\\Interpreter-of-Dy.X-main\\Interpreter.Logic\\Interpreter.Logic.csproj"
+              "C:\\Users\\HP\\Documents\\HULK Interpreter\\Interpreter.Logic\\Interpreter.Logic.csproj": {
+                "projectPath": "C:\\Users\\HP\\Documents\\HULK Interpreter\\Interpreter.Logic\\Interpreter.Logic.csproj"
               }
             }
           }

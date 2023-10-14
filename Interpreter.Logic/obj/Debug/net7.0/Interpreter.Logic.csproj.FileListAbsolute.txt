@@ -10,3 +10,15 @@ C:\Users\HP\Documents\Interpreter-of-Dy.X-main\Interpreter.Logic\obj\Debug\net7.
 C:\Users\HP\Documents\Interpreter-of-Dy.X-main\Interpreter.Logic\obj\Debug\net7.0\refint\Interpreter.Logic.dll
 C:\Users\HP\Documents\Interpreter-of-Dy.X-main\Interpreter.Logic\obj\Debug\net7.0\Interpreter.Logic.pdb
 C:\Users\HP\Documents\Interpreter-of-Dy.X-main\Interpreter.Logic\obj\Debug\net7.0\ref\Interpreter.Logic.dll
+C:\Users\HP\Documents\HULK Interpreter\Interpreter.Logic\bin\Debug\net7.0\Interpreter.Logic.deps.json
+C:\Users\HP\Documents\HULK Interpreter\Interpreter.Logic\bin\Debug\net7.0\Interpreter.Logic.dll
+C:\Users\HP\Documents\HULK Interpreter\Interpreter.Logic\bin\Debug\net7.0\Interpreter.Logic.pdb
+C:\Users\HP\Documents\HULK Interpreter\Interpreter.Logic\obj\Debug\net7.0\Interpreter.Logic.csproj.AssemblyReference.cache
+C:\Users\HP\Documents\HULK Interpreter\Interpreter.Logic\obj\Debug\net7.0\Interpreter.Logic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\Documents\HULK Interpreter\Interpreter.Logic\obj\Debug\net7.0\Interpreter.Logic.AssemblyInfoInputs.cache
+C:\Users\HP\Documents\HULK Interpreter\Interpreter.Logic\obj\Debug\net7.0\Interpreter.Logic.AssemblyInfo.cs
+C:\Users\HP\Documents\HULK Interpreter\Interpreter.Logic\obj\Debug\net7.0\Interpreter.Logic.csproj.CoreCompileInputs.cache
+C:\Users\HP\Documents\HULK Interpreter\Interpreter.Logic\obj\Debug\net7.0\Interpreter.Logic.dll
+C:\Users\HP\Documents\HULK Interpreter\Interpreter.Logic\obj\Debug\net7.0\refint\Interpreter.Logic.dll
+C:\Users\HP\Documents\HULK Interpreter\Interpreter.Logic\obj\Debug\net7.0\Interpreter.Logic.pdb
+C:\Users\HP\Documents\HULK Interpreter\Interpreter.Logic\obj\Debug\net7.0\ref\Interpreter.Logic.dll

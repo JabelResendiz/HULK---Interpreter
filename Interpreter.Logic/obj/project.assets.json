@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HP\\Documents\\Interpreter-of-Dy.X-main\\Interpreter.Logic\\Interpreter.Logic.csproj",
+      "projectUniqueName": "C:\\Users\\HP\\Documents\\HULK Interpreter\\Interpreter.Logic\\Interpreter.Logic.csproj",
       "projectName": "Interpreter.Logic",
-      "projectPath": "C:\\Users\\HP\\Documents\\Interpreter-of-Dy.X-main\\Interpreter.Logic\\Interpreter.Logic.csproj",
+      "projectPath": "C:\\Users\\HP\\Documents\\HULK Interpreter\\Interpreter.Logic\\Interpreter.Logic.csproj",
       "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HP\\Documents\\Interpreter-of-Dy.X-main\\Interpreter.Logic\\obj\\",
+      "outputPath": "C:\\Users\\HP\\Documents\\HULK Interpreter\\Interpreter.Logic\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"

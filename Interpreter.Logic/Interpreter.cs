@@ -140,7 +140,7 @@ public class Interpreter : NodeVisitor
                 if(left is bool || right is bool){
                     SemanticError($"Operator \" @ \" cannot be used between a \"bool\" ");
                 }
-                result =((left is string)?(string)left: ((double)left).ToString()) + ((right is string)?(string)right: ((double)right).ToString());
+                result =((left is string)?(string)left: (Convert.ToDouble(left)).ToString()) + ((right is string)?(string)right: (Convert.ToDouble(right)).ToString());
                 break;
             
             case TokenTypes.PLUS:
@@ -155,7 +155,7 @@ public class Interpreter : NodeVisitor
                         SemanticError($"Operator \" + \" cannot be used between \"{left.GetType()}\" and \"{right.GetType()}\"");
                     }
                     else{
-                        result = (double)left + (double)right;
+                        result = Convert.ToDouble(left) + Convert.ToDouble(right);
                     }
                 }
                 break;
@@ -166,7 +166,7 @@ public class Interpreter : NodeVisitor
                     SemanticError($"Operator \"- \" cannot be used between not \"{left.GetType()}\" and \"{right.GetType()}\"");
                 }
 
-                result =(double)left - (double)right;
+                result =Convert.ToDouble(left) - Convert.ToDouble(right);
                 
                 break;
             
@@ -176,7 +176,7 @@ public class Interpreter : NodeVisitor
                     SemanticError($"Operator \"* \" cannot be used between not \"{left.GetType()}\" and \"{right.GetType()}\"");
                 }
 
-                result = (double)left * (double)right;
+                result =Convert.ToDouble(left) * Convert.ToDouble(right);
                 
                 break;
             
@@ -186,7 +186,7 @@ public class Interpreter : NodeVisitor
                     SemanticError($"Operator \"/ \" cannot be used between not \"{left.GetType()}\" and \"{right.GetType()}\"");
                 }
 
-                result = (double)left / (double)right;
+                result = Convert.ToDouble(left) / Convert.ToDouble(right);
                 
                 break;
 
@@ -198,7 +198,7 @@ public class Interpreter : NodeVisitor
                     SemanticError($"Operator \"% \" cannot be used between not \"{left.GetType()}\" and \"{right.GetType()}\"");
                 }
 
-                result = (double)left % (double)right;
+                result = Convert.ToDouble(left)% Convert.ToDouble(right);
                 
                 break;
             }
@@ -208,7 +208,7 @@ public class Interpreter : NodeVisitor
                     SemanticError($"Operator \"^ \" cannot be used between not \"{left.GetType()}\" and \"{right.GetType()}\"");
                 }
 
-                result =Math.Pow((double)left,(double)right);
+                result =Math.Pow(Convert.ToDouble(left),Convert.ToDouble(right));
                 
                 break;
 
@@ -224,7 +224,7 @@ public class Interpreter : NodeVisitor
                         SemanticError($"Operator \"== \" cannot be used between not \"{left.GetType()}\" and \"{right.GetType()}\"");
                     }
                     else{
-                        result =(double)left == (double)right;;
+                        result =Convert.ToDouble(left) == Convert.ToDouble(right);
                     }
                 }
                 break;
@@ -241,7 +241,7 @@ public class Interpreter : NodeVisitor
                         SemanticError($"Operator \"!= \" cannot be used between not \"{left.GetType()}\" and \"{right.GetType()}\"");
                     }
                     else{
-                        result = (double)left != (double)right;;
+                        result = Convert.ToDouble(left) != Convert.ToDouble(right);
                     }
                 }
                 break;
@@ -251,7 +251,7 @@ public class Interpreter : NodeVisitor
                 if(left is string || left is bool || right is string || right is bool){
                     SemanticError($"Operator \"< \" cannot be used between not \"{left.GetType()}\" and \"{right.GetType()}\"");
                 }
-                result = (double)left < (double)right;
+                result = Convert.ToDouble(left) < Convert.ToDouble(right);
                 
                 break;
 
@@ -260,7 +260,7 @@ public class Interpreter : NodeVisitor
                 if(left is string || left is bool || right is string || right is bool){
                     SemanticError($"Operator \"> \" cannot be used between not \"{left.GetType()}\" and \"{right.GetType()}\"");
                 }
-                result = (double)left > (double)right;
+                result = Convert.ToDouble(left) > Convert.ToDouble(right);
                 
                 break;
             
@@ -269,7 +269,7 @@ public class Interpreter : NodeVisitor
                 if(left is string || left is bool || right is string || right is bool){
                     SemanticError($"Operator \"<= \" cannot be used between not \"{left.GetType()}\" and \"{right.GetType()}\"");
                 }
-                result = (double)left <= (double)right;
+                result = Convert.ToDouble(left) <= Convert.ToDouble(right);
                 
                 break;
             
@@ -278,7 +278,7 @@ public class Interpreter : NodeVisitor
                     SemanticError($"Operator \">= \" cannot be used between not \"{left.GetType()}\" and \"{right.GetType()}\"");
                 }
 
-                result = (double)left >= (double)right;
+                result = Convert.ToDouble(left) >= Convert.ToDouble(right);
                 
                 break;
             
@@ -338,7 +338,7 @@ public class Interpreter : NodeVisitor
         foreach (var item in node.Commands)
         {
             object output =Visit(item,Scope);
-            Console.WriteLine((output is string)?(string)output: (output is bool)? (bool)output : (double)output);
+            Console.WriteLine((output is string)?(string)output: (output is bool)? (bool)output : Convert.ToDouble(output));
             Scope.Clear();
 
         }
