@@ -69,7 +69,6 @@ public class Parser
         AST node = Comparer();
         Token token = new Token(CurrentToken);
         while (CurrentToken.Type == TokenTypes.AND || CurrentToken.Type == TokenTypes.OR
-                || CurrentToken.Type == TokenTypes.NOT
             )
         {
             token = new Token(CurrentToken);
@@ -81,9 +80,6 @@ public class Parser
             
                 Process(TokenTypes.OR,"or");
             
-            else if(token.Type == TokenTypes.NOT)
-
-                Process(TokenTypes.NOT,"not");
             
             node = new BinaryOperator(node, token, Comparer());
             
@@ -138,7 +134,10 @@ public class Parser
                 
                 Process(TokenTypes.GREATER_EQUAL,"greater equal");
             
-        
+            else if (token.Type == TokenTypes.NOT)
+
+                Process(TokenTypes.NOT,"not");
+
             node = new BinaryOperator(node, token, Expression());
         }
 

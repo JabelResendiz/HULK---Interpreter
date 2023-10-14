@@ -1,66 +1,65 @@
 # INTERPRETER OF HULK
 
+## GENERAL
+ 
+Interprete del lenguaje HULK escrito en C# en .NET7.0 , Windows10. Para compilarlo dirigirlo a la carpeta Interpreter.Visual y seguido el comando --dotnet run. 
+
 ## GRAMATIC
 
 ```
-program : import block export
-
-import : IMPORT globals_variables (COMMA globals_variables)* SEMI
-
-export : EXPORT SEMI
-
-block : MAIN L_KEYS statement_list (SEMI statement_list)* R_KEYS
+program : statement_list
 
 statement_list : statement
-               | statement SEMI statement_list
 
 statement : declarations
           | assignment
           | conditionals
-          | cicles
-          | funtions
-          | empty
+          | functions
+          | call_functions  
+          | print
+          | compounds
 
-functions : INTERNAL L_PARENT factor (COMMA factor)* R_PARENT
+declarations : LET + ID (COMMA ID)* + EQUAL + compounds + IN + compounds
 
+assignment : ID + ASSIGN + compounds
 
-declarations : type_data ID (COMMA ID)* SEMI
+conditionals : IF + L_PARENT + compounds + R_PARENT (RETURN)* + compounds + ELSE (RETURN)*+ compounds
 
-assignment : variable ASSIGN compounds
+functions :FUNCTIONS + ID + L_PARENT + ID (COMMA ID)* + R_PARENT + RETURN + compounds
 
-cicles : WHILE L_PARENT compounds R_PARENT L_KEYS statement_list R_KEYS
+call_functions:  L_PARENT + compounds (COMMA compounds)* + R_PARENT 
 
-conditionals : IF L_PARENT compounds R_PARENT L_KEYS statement_list R_KEYS
+print: PRINT + L_PARENT + compounds + R_PARENT
 
-compounds : comp ((AND | OR) comp)*
-          | L_PARENT compounds R_PARENT
+compounds : comp + ((AND | OR) comp)*
 
-comp : expr ((SAME | DIFFERENT | LESS | GREATER | LESS_EQUAL | GREATER_EQUAL | NOX) expr)*
+comp : expr + ((SAME | DIFFERENT | LESS | GREATER | LESS_EQUAL | GREATER_EQUAL | NOT ) expr)*
 
-expr : term ((PLUS | MINUS) term)*
+expr : term + ((PLUS | MINUS | AT ) term)*
 
-term : factor ((MUL | DIV | MOD) factor)*
+term : exp + ((MUL | DIV | MOD) exp)*
 
-factor : PLUS factor
+exp: factor + ((POW) factor)*
+
+factor :statement 
+       | PLUS factor
        | MINUS factor
-       | INTEGER 
-       | FLOAT 
+       | NUMBER
        | STRING
+       | BOOLEAN
+       | PI
+       | ID
        | TRUE
        | FALSE
-       | L_PARENT expr R_PARENT
+       | L_PARENT compounds R_PARENT
 
-type_data : INTEGER 
-          | FLOAT 
+
+type_data : 
+           NUMBER 
           | BOOL 
           | STRING
 
-globals_variables : states
-                  | models
 
-variable : ID
-
-empty : 
 ```
 
 ## Operators
@@ -70,7 +69,6 @@ empty :
 - **[OK]** _MULT (*)_
 - **[OK]** _MOD (%)_
 - **[OK]** _FLOAT_DIV (/)_
-- **[OK]** _INTEGER_DIV (//)_
 - **[OK]** _ASSIGN (=)_
 - **[OK]** _SAME (==)_
 - **[OK]** _DIFFERENT (!=)_
@@ -78,45 +76,29 @@ empty :
 - **[OK]** _GREATER (>)_
 - **[OK]** _LESS_EQUAL (<=)_
 - **[OK]** _GREATER_EQUAL (>=)_
-- **[OK]** _NOX (!)_
-- **[OK]** _AND (&&)_
-- **[OK]** _OR (||)_
+- **[OK]** _NOT (!)_
+- **[OK]** _AND (&)_
+- **[OK]** _OR (|)_
 
 ## RESERVED KEYWORDS
-- **@Internal**
-- **export**
-- **int**
-- **float**
+
+- **number**
 - **string**
+- **let**
+- **in**
 - **True**
 - **False**
-- **main**
 - **if**
-- **while**
-- **ShowLine**
+- **print**
 - **return**
+- **else**
+- **function**
 
-## EXAMPLE OF CODE
+## EXAMPLES OF CODE
 
 ```
-main{
-
-    int a = 15, b = 20, c;
-
-    if ( b > a) {
-        c = a;
-        a = b;
-        b = a;
-    }
-
-    while (a % b != 0) {
-        int r = a % b;
-        a = b;
-        b = r;
-    }
-
-    [< This is a comment >]
-
-    ShowLine(a + ' ' + b + ' ' + c);
-}
+    >let number = 42 in (let text = "The meaning of life is" in (print(text @ number))); 
+    >let a = 42 in if (a % 2 == 0) print("Even") else print("odd");
+    >function fib(a)=> if(a==1) return 1 else return (fib(a-1)*a);
+    >print(23+print(21));
 ```

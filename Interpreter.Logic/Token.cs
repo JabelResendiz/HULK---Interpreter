@@ -24,6 +24,7 @@ public class Token
     }
 }
 
+// palabras reservadas del lenguaje
 public static class ReservateKeywords
 {
     public static List<(string,TokenTypes)>tuplas= new List<(string, TokenTypes)>{
@@ -39,35 +40,9 @@ public static class ReservateKeywords
         ("function",TokenTypes.FUNCTION),//no
         ("sen",TokenTypes.SEN),//si
         ("cos",TokenTypes.COS),//si
-        ("tan",TokenTypes.TAN),//si
         ("log",TokenTypes.LOG),//si
         ("PI", TokenTypes.PI)//si
     };
     public static Dictionary<string, TokenTypes> Keyword{get;set;}= tuplas.ToDictionary(t=>t.Item1,t=>t.Item2);
     
-    //public Dictionary<string, AST> Function;
-
-/*
-    public ReservateKeywords()
-    {
-        Keyword = new Dictionary<string, TokenTypes>();
-        //Function = new Dictionary<string, AST>();
-
-        //Keyword.Add("main", TokenTypes.MAIN);
-        Keyword.Add("let",TokenTypes.LET);
-        Keyword.Add("in",TokenTypes.IN);
-        //Keyword.Add("int", TokenTypes.INTEGER);
-        //Keyword.Add("float", TokenTypes.FLOAT);
-        //Keyword.Add("bool", TokenTypes.BOOLEAN);
-        //Keyword.Add("string", TokenTypes.STRING);
-        Keyword.Add("if", TokenTypes.IF);
-        Keyword.Add("else",TokenTypes.ELSE);
-        Keyword.Add("True", TokenTypes.TRUE);
-        Keyword.Add("False", TokenTypes.FALSE);
-        Keyword.Add("while", TokenTypes.WHILE);
-        Keyword.Add("print", TokenTypes.PRINT);
-        Keyword.Add("return", TokenTypes.RETURN);
-        Keyword.Add("function",TokenTypes.FUNCTION);
-    }
-    */
 }
