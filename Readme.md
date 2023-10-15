@@ -2,7 +2,7 @@
 
 ## GENERAL
  
-Interprete del lenguaje HULK escrito en C# en .NET7.0 , Windows10. Para compilarlo dirigirlo a la carpeta Interpreter.Visual y seguido el comando --dotnet run. 
+Interprete del lenguaje HULK escrito en C# en .NET7.0 , Windows10. Para compilarlo dirigirlo a la carpeta Interpreter.Visual y seguido el comando --dotnet run. Para informaciones generales del lenguaje ver INforme.tex y generar el pdf. Gracias!
 
 ## GRAMATIC
 
