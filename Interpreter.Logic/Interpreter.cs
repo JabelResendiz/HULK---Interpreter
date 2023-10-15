@@ -185,7 +185,9 @@ public class Interpreter : NodeVisitor
                 if(left is string || left is bool || right is string || right is bool){
                     SemanticError($"Operator \"/ \" cannot be used between not \"{left.GetType()}\" and \"{right.GetType()}\"");
                 }
-
+                if(Convert.ToDouble(right)==0){
+                    SemanticError("La divsion por 0 no esta definida");
+                }
                 result = Convert.ToDouble(left) / Convert.ToDouble(right);
                 
                 break;

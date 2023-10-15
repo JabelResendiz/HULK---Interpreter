@@ -9,7 +9,7 @@ Interprete del lenguaje HULK escrito en C# en .NET7.0 , Windows10. Para compilar
 ```
 program : statement_list
 
-statement_list : statement
+statement_list : compounds
 
 statement : declarations
           | assignment

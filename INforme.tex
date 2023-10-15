@@ -1,0 +1,277 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[left=2.5cm, right=2.5cm, top=3cm, bottom=3cm]{geometry}
+
+% Paquetes para el rednerizado de estructuras matemáticas, teoremas, símbolos, etc.
+% AMS es una familia de paqueted
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{listings}
+
+\lstdefinestyle{csharp}{
+    language=[Sharp]C,
+    frame=double,
+    %breakline=true,
+    basicstyle=\ttfamily\small,
+    %keywordstyle=\color{blue},
+    %commentstyle=\color{green},
+    %stringstyle=\color{orange},
+}
+
+
+\begin{document}
+\title{Proyecto de Programaci\'on II HULK}
+\author{Jabel Resendiz Aguirre}
+\maketitle
+
+% La clase 'article' permite declarar un abstract (resumen)
+\section{Introducci\'on}
+    Como parte del II proyecto de la carrera de programación de la carrera Ciencias
+de la Computación , se implementará un intérprete del lenguaje de programación [HULK].
+Solo se definirá un subconjunto del lenguaje,definido a continuación, como parte de otro proyecto en 3er año de la carrera.
+En el archivo Readme.md adjunto al código se dan a conocer las exigencias para compilar el proyecto. 
+
+
+\section{Interpreter.Logic}\label{sec:intro}
+ 
+En este biblioteca de clases está todo la lógica del proyecto en C. Se divide en tres procesos fundamentales:
+
+\begin{itemize}
+    \item An\'alisis Lexicogr\'afico(LEXER): donde se realiza la conversi\'on de una secuencia de caracteres a una secuencia de tokens. En esta fase se detectan los errores relacionados con la escritura incorrecta de s\'imbolos.
+    \item An\'alisis Sint\'actico(PARSER): donde se determina la estructura sint\'actica del programa a partir de los tokens y se obtiene una estructura intermedia. Se detectan los errores relacionado con la sintaxis(gram\'atica).
+    \item An\'alisis Sem\'antico : donde se verifica las condiciones sem\'anticas del programa y se valida el uso correcto de todo los s\'imbolos definidos.
+\end{itemize}
+
+
+\subsection{An\'a lisis Lexicogr\'afico(LEXER)}\label{sub:center}
+    En el c\'odigo hay tres archivos que analizan este proceso. Un enum define todos los tipos de tokens posibles en el lenguaje.
+    almacenar\'a cada token como un tipo y su valor. Adem\'as se define una clase ReservedKeyword que contiene todas las palabras reservadas del lenguaje, entiendase por reservada que su uso en el lenguaje define la invocacion de una instruccion o parte importante de la sintaxis del lenguaje. Evite usar estas palabras como parte de nombres de variables.
+    Una clase Lexer que buscar\'a dentro de la cadena el pr\'oximo token de la cadena mediante la siguiente sintaxis:
+\begin{lstlisting}[style=csharp]
+public class Lexer
+{
+    
+public Token GetNextToken()
+{
+        
+    while (CurrentChar != null)
+{
+    if (char.IsWhiteSpace((char)CurrentChar))
+{
+    SkipSpace(); 
+    continue;
+}
+
+    if (CurrentChar == '\"')
+{
+    return Cadene();
+}
+
+    if (char.IsLetter((char)CurrentChar))
+{
+    return Variable();
+}           
+
+    if(char.IsDigit((char)CurrentChar))
+{
+    return Number();
+}
+
+    switch (CurrentChar){
+        case '@':
+            Next();
+            return new Token(TokenTypes.AT,'@');
+            ...
+        }
+            ... 
+        }
+    }
+            
+}
+    \end{lstlisting}
+
+    Este m\'etodo se encargar\'a de pasar char por char de la cadena incial y encontrar con m\'etodos auxiliares la forma de encontrar que tipo de token es.
+
+    \subsection*{Cuestiones generales}
+    \begin{itemize}
+        \item Los errores l\'exicos se detectan por char que no encontramos v\'alidos en el lenguaje
+        \item Adem\'as por mal uso de los tipos, osea combinaciones de d\'igitos y letras
+    \end{itemize}
+
+\subsection{An\'alisis Sint\'actico(PARSER) }\label{sub:center}
+
+ Este proceso sigue una gr\'amatica espec\'ifica. El proceso en la clase Parser analiza la cadena para producir un \'arbol de derivaci\'on final.
+ Cumpliendo la jerarqu\'ia, se crea una lista de instrucciones que reconoce la instrucci\'on que existe en la l\'inea. El algoritmo a pensar es dado un token , saber si es terminal o no. S\'imbolos terminales son aquellos que estar\'an en el m\'etodo Factor.
+
+ \begin{lstlisting}[style=csharp]
+
+    program : statement_list
+
+    statement_list : compounds
+    
+    statement : declarations
+              | assignment
+              | conditionals
+              | functions
+              | call_functions  
+              | print
+              | compounds
+    
+    declarations : LET + ID (COMMA ID)* + EQUAL + compounds + IN + compounds
+    
+    assignment : ID + ASSIGN + compounds
+    
+    conditionals : IF + L_PARENT + compounds + R_PARENT (RETURN)* + compounds + ELSE (RETURN)*+ compounds
+    
+    functions :FUNCTIONS + ID + L_PARENT + ID (COMMA ID)* + R_PARENT + RETURN + compounds
+    
+    call_functions:  L_PARENT + compounds (COMMA compounds)* + R_PARENT 
+    
+    print: PRINT + L_PARENT + compounds + R_PARENT
+    
+    compounds : comp + ((AND | OR) comp)*
+    
+    comp : expr + ((SAME | DIFFERENT | LESS | GREATER | LESS_EQUAL | GREATER_EQUAL | NOT ) expr)*
+    
+    expr : term + ((PLUS | MINUS | AT ) term)*
+    
+    term : exp + ((MUL | DIV | MOD) exp)*
+    
+    exp: factor + ((POW) factor)*
+    
+    factor :statement 
+           | PLUS factor
+           | MINUS factor
+           | NUMBER
+           | STRING
+           | BOOLEAN
+           | PI
+           | ID
+           | TRUE
+           | FALSE
+           | L_PARENT compounds R_PARENT
+    
+    
+    type_data : 
+               NUMBER 
+              | BOOL 
+              | STRING
+    
+    
+ \end{lstlisting}
+
+Se sigue un an\'alisis recursivo para crear cada nodo nuevo del \'arbol. Muchos token solo forman parte de la gram\'atica espec\'ifica de la instancia por tanto su uso cumple una regla.
+
+\subsection*{Cuestiones generales}
+\begin{itemize}
+    \item Los errores sint\'acticos son detectados por tokens inesperados, osea que un token forme parte de una gr\'amatica espec\'ifica y no se encuentre por ejemplo: despu\'es de un print le sucede un parent\'esis abierto, si al poner print no se encuentra tal par\'entesis pues se devolver\a' un error
+    \item Tambi\'encontrar\'a token que no invocan una instrucci\'on como poner : (in print(23)), el cual el token IN no invoca una instrucci\'on y por tanto se usa mal.
+\end{itemize}
+
+\subsection{An\'alisis Sem\'antico }
+
+En esta fase se evaluar\'a el AST, evaluando el sub\'arbol izquierdo y despu\'es el sub\'arbol derecho. Recursivamente se contin\'ua de esta forma por cada nodo del \'arbol hasta llegar a una hoja(nodo que no contiene hijos). Cada hoja representar\'a un s\'imbolo terminal y por tanto tendr\'a asociado un valor, el cual ser\'a devuelto. Veamos un ejemplo c\'odigo
+
+\begin{lstlisting}[style=csharp]
+
+using System;
+
+public abstract class NodeVisitor 
+
+{
+    
+protected object Visit(AST node,Dictionary<string,object> some)
+{
+            ...
+        if (node is BinaryOperator)
+
+        return VisitBinaryOperator((BinaryOperator)node,some);
+            
+        else if (node is Instructions)
+
+        return VisitInstructions((Instructions)node,some);
+    
+        else if (node is Num)
+    
+        return VisitDeclarations((Num)node,some);
+            ...
+}
+
+        ...
+public abstract object VisitBinaryOperator(BinaryOperator node,Dictionary<string,object>Scope);
+public abstract object VisitInstructions(Instructions node,Dictionary<string,object>Scope);
+public abstract object Num(Num node,Dictionary<string,object>Scope);
+        ...
+}
+
+\end{lstlisting}
+
+ La clase NodeVisitor est\'a implementada para en su m\'etodo Visitor se reciba un nodo , se localice de que tipo es(en este caso Declaration, Instruccion o BinaryOperator) para acceder entonces al m\'etodo que lo implementa.
+ La clase Interpreter que hereda de NodeVisitor debe implementar cada m\'etodo abstracto de su clase padre.
+ \begin{lstlisting}[style=csharp]
+
+    public class Interpreter : NodeVisitor
+{
+ ... 
+ public Interpreter(Parser parser){
+    ...
+ }
+ public override object VisitBinaryOperator(BinaryOperator node,Dictionary<string,object>Scope)
+ {
+     object result = 0;
+
+     object left = Visit(node.Left,Scope);
+     object right = Visit(node.Right,Scope);
+
+     switch (node.Operator.Type)
+     {
+        case TokenTypes.PLUS:
+            ... 
+            if(left is string)
+                result= (string)left + (string)right;
+            else
+                result=Convert.ToDouble(left)+ Convert.ToDouble(right);
+            break;
+        ...
+     }
+ }
+
+
+ public override object VisitInstructions(Instructions node,Dictionary<string,object>Scope)
+ {
+     foreach (var item in node.Commands)
+     {
+         object output =Visit(item,Scope);
+         Console.WriteLine((output is string)?(string)output: (output is bool)? (bool)output : Convert.ToDouble(output));
+         Scope.Clear();
+
+     }
+
+     return 0;
+ }
+
+ public override object Num(Num node,Dictionary<string,object>Scope)
+ {
+    return node.Value;
+ }
+ ... 
+}
+ \end{lstlisting}
+
+ Como notamos el m\'etodo BinaryOperator al recibir un objeto BinaryOperator que contiene campo su rama izquierda, una para la derecha y un campo con el signo guardado. 
+ Eval\'ua cada nodo (derecho e izquierdo) y realizar\'a la operaci\'on entre el valor de cada nodo dado su signo.
+
+Por otro lado el m\'etodo Instruccion al recibir un objeto Instruccion que contiene  un campo con una lista de AST y evaluar\'a cada uno de ellos. Aunque dado las caracter\'isticas de este lenguaje cada l\'inea representar\'a un AST.
+
+El m\'etodo Num al recibir un objeto Num que contiene un campo con el valor del n\'umero , lo retorna tal cual.
+
+De esta forma y an\'alogamente para cada m\'etodo se eval\'ua recursivamente el \'arbol.
+
+\subsection*{Cuestiones generales}
+
+\begin{itemize}
+    \item Toda l\'inea imprime un resultado que ser\'a el valor del \'arbol creado, incluso la declaraci\'on de funciones en el lenguaje en el cual se retorna 0 por defecto y muestra de que se ha incluido correctamente
+    \item Los errores sem\'anticos son obtenidos de errores durante la evaluaci\'on, ya sea por realizar operaciones entre objetos de tipo diferente sin usar los s\'imbolos permitidos,por obtener valores de excepci\'on del compilador de C\#.
+\end{itemize}
+
+
+ \end{document}
