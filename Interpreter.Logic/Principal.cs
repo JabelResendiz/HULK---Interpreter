@@ -12,8 +12,7 @@ using InterpreterDyZ;
         public static Dictionary<string,AST> Functiones= new Dictionary<string, AST>();
         public Principal(){
             
-            Text="++3;";
-            Method();
+           
            Console.WriteLine("PRESIONA ENTER O ESC PARA ALGUNA FUNCION");
             while(true)
             {
