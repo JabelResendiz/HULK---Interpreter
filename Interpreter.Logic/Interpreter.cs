@@ -305,8 +305,12 @@ public class Interpreter : NodeVisitor
     // metodo para evaluar operadores unarios
     public override object VisitUnaryOperator(UnaryOperator node,Dictionary<string,object>Scope)
     {
-        int result = 0;
+        object result = 0;
+        if(node.Operator.Type== TokenTypes.NOT){
+            object resultado=!(bool)Visit(node.Expression,Scope);
 
+            return resultado;
+        }
         object exp= Visit(node.Expression,Scope);
 
         if(!(exp is double))
@@ -320,13 +324,13 @@ public class Interpreter : NodeVisitor
         {
             case TokenTypes.PLUS:
 
-                result = +(int)exp;
+                result = +(double)exp;
 
                 break;
             
             case TokenTypes.MINUS:
 
-                result = -(int)exp;
+                result = -(double)exp;
 
                 break;
         }

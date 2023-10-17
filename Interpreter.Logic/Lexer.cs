@@ -29,6 +29,7 @@ public class Lexer
 
 
     #region 2-GetNextToken() es para devolver el token que continua en la cadena
+    
     public Token GetNextToken()
     {
         while (CurrentChar != null)
@@ -302,7 +303,7 @@ public class Lexer
         
         string value = "";
 
-        while (CurrentChar != null && char.IsDigit((char)CurrentChar))
+        while ((CurrentChar != null && char.IsDigit((char)CurrentChar)) || CurrentChar=='.')
         {
             
             value += CurrentChar;
@@ -324,6 +325,12 @@ public class Lexer
                 Next();
             }
             if(variable!=0)ErrorLexico($"\" {value} \" is not valid token. Col {Pos-value.Length}");
+        }
+        try{
+            double floatValue= double.Parse(value);
+        }
+        catch(Exception e){
+            ErrorLexico($"\"{value}\" is not valid token. Col {Pos-value.Length}");
         }
         return new Token(TokenTypes.NUMBER, double.Parse(value));
         
