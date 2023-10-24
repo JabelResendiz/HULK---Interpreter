@@ -504,7 +504,7 @@ public class Parser
         Process(TokenTypes.R_PARENT,$"closed parenthesis after \"{token.Value}\" function args .Col {Lexer.Pos-CurrentToken.Value.ToString().Length}");
         Process(TokenTypes.RETURN,$" return before function body.Col {Lexer.Pos- CurrentToken.Value.ToString().Length}");
         
-        node = new FUNCTIONAL(token,arguments,Statement());
+        node = new FUNCTIONAL(token,arguments,Compounds());
 
         return node;
     }

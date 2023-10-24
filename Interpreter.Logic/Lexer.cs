@@ -369,6 +369,7 @@ public class Lexer
         while(CurrentChar!= null && pos< Text.Length && char.IsWhiteSpace(Text[pos])){
             pos+=1;
         }
+        if(pos>= Text.Length-1)return false;
         return  (Text[pos]== '=') &&(Text[pos+1]!='=');
     }
    

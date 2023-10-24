@@ -37,7 +37,7 @@ public class Interpreter : NodeVisitor
         
         object tree= Visit(node.Statement,Scope);
             if(tree is string || tree is bool){
-                SemanticError("The args of logarithm function is an double variable");
+                SemanticError("The args of logarithm function is a double variable");
             }
 
             if(Convert.ToSingle(tree)<=0){
@@ -48,7 +48,7 @@ public class Interpreter : NodeVisitor
         {   
             object tree2=Visit(node.bases,Scope);
              if(!(tree2 is double)){
-                SemanticError("The base of logarithm is an double variable");
+                SemanticError("The base of logarithm is a double variable");
             }
 
             if(Convert.ToSingle(tree2)<=0 || Convert.ToSingle(tree2)==1 ){

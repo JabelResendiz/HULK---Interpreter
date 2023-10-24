@@ -236,8 +236,8 @@ public class Cos:AST
 
 public class LOG:AST{
 
-    public AST bases;
-    public AST Statement;
+    public AST? bases;
+    public AST? Statement;
     public LOG(AST bases,AST Statement){
         this.bases=bases;
         this.Statement=Statement;

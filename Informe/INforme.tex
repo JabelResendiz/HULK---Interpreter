@@ -6,6 +6,8 @@
 % AMS es una familia de paqueted
 \usepackage{amsmath, amsthm, amssymb}
 \usepackage{listings}
+\usepackage{xcolor}
+
 
 \lstdefinestyle{csharp}{
     language=[Sharp]C,
@@ -42,7 +44,7 @@ En este biblioteca de clases está todo la lógica del proyecto en C. Se divide 
 \end{itemize}
 
 
-\subsection{An\'a lisis Lexicogr\'afico(LEXER)}\label{sub:center}
+\subsection{An\'alisis Lexicogr\'afico(LEXER)}\label{sub:center}
     En el c\'odigo hay tres archivos que analizan este proceso. Un enum define todos los tipos de tokens posibles en el lenguaje.
     almacenar\'a cada token como un tipo y su valor. Adem\'as se define una clase ReservedKeyword que contiene todas las palabras reservadas del lenguaje, entiendase por reservada que su uso en el lenguaje define la invocacion de una instruccion o parte importante de la sintaxis del lenguaje. Evite usar estas palabras como parte de nombres de variables.
     Una clase Lexer que buscar\'a dentro de la cadena el pr\'oximo token de la cadena mediante la siguiente sintaxis:
@@ -273,5 +275,7 @@ De esta forma y an\'alogamente para cada m\'etodo se eval\'ua recursivamente el 
     \item Los errores sem\'anticos son obtenidos de errores durante la evaluaci\'on, ya sea por realizar operaciones entre objetos de tipo diferente sin usar los s\'imbolos permitidos,por obtener valores de excepci\'on del compilador de C\#.
 \end{itemize}
 
-
+\section{Interpreter.Visual}\label{sec:intro}
+Se ha creado en la biblioteca dos clases como parte de la interfaz gr\'afica de la app de consola. No es muy avanzado pero incluye un menu de opciones, "PLAY" para iniciar con el compilador , "ABOUT" que dar\'a m\'as informaci\'on sobre el int\'erprete y c\'omo funciona ,y una \'ultima opci\'on "EXIT" que dar\'a fin al programa y lo cerrar\'a. 
+En estas clases se lleva un contador que aumenta(o disminuye) a trav\'es de la matriz de opciones,dependiendo de si se usan las teclas arriba o abajo. Se limpia la consola con el m\'etodo Clean() y se restablece el diseño.Incluye adem\'as un men\'u para definir el color.  
  \end{document}

@@ -1,6 +1,6 @@
 using System.Reflection.Emit;
 using InterpreterDyZ;
-
+using static System.Console;
 
     //Dictionary<string,AST>functional= new Dictionary<string, AST>();
     public class Principal{
@@ -13,30 +13,34 @@ using InterpreterDyZ;
         public Principal(){
             
            
-           Console.WriteLine("PRESIONA ENTER O ESC PARA ALGUNA FUNCION");
+           WriteLine("PRESS ENTER OR ESCAPE FOR SOME FUNCTIONALITY");
             while(true)
             {
                 
-                if(Console.KeyAvailable)
+                if(KeyAvailable)
                 {   
                     
-                    var key= Console.ReadKey(true).Key;
+                    var key= ReadKey(true).Key;
 
                     if(key==ConsoleKey.Enter)
                     {   
 
-                        Console.Write(">");
-                        Text=Console.ReadLine();
+                        Write(">");
+                        Text=ReadLine();
                         try{
                             Method();
                         }
                         catch(Exception ex){
-                            Console.WriteLine(".Try again please.");
+                            var g= ForegroundColor;
+                            ForegroundColor=ConsoleColor.Yellow;
+                            WriteLine(".Try again please.");
+                            ForegroundColor=g;
                         }
                     }
 
                     else if(key==ConsoleKey.Escape)
                     {
+                        
                         break;
                     }
                 }
@@ -54,7 +58,7 @@ using InterpreterDyZ;
             parser = new Parser(lexer);
             interpreter = new Interpreter(parser);
 
-            Console.ForegroundColor = ConsoleColor.Green;
+            //Console.ForegroundColor = ConsoleColor.Green;
 
             interpreter.Interpret();
 
