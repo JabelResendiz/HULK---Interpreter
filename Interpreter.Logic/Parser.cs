@@ -468,7 +468,7 @@ public class Parser
         
         while (CurrentToken.Type == TokenTypes.COMMA)
         {
-            Process(TokenTypes.COMMA,$"comma. Function args must be separated by commas.Col {Lexer.Pos-CurrentToken.Value.ToString().Length}");
+            Process(TokenTypes.COMMA,$"Function args must be separated by commas.Col {Lexer.Pos-CurrentToken.Value.ToString().Length}");
            
             AST tree2= Compounds();
             arguments.Add(tree2);
@@ -570,8 +570,46 @@ public class Parser
         AST node = Variable();
         Token token = new Token(CurrentToken);
         Process(TokenTypes.ID,$"variable name .Col {Lexer.Pos-CurrentToken.Value.ToString().Length}");
-        Process(TokenTypes.ASSIGN,$" \"equal\" sign to declare variable. Col {Lexer.Pos-CurrentToken.Value.ToString().Length}");
+        if(CurrentToken.Type == TokenTypes.ASSIGN)
+            Process(TokenTypes.ASSIGN,$" \"equal\" sign to declare variable. Col {Lexer.Pos-CurrentToken.Value.ToString().Length}");
+        else if(CurrentToken.Type ==TokenTypes.ASSIGN_DIV || CurrentToken.Type ==TokenTypes.ASSIGN_PLUS || 
+        CurrentToken.Type ==TokenTypes.ASSIGN_MUL || CurrentToken.Type ==TokenTypes.ASSIGN_MINUS || CurrentToken.Type ==TokenTypes.ASSIGN_MOD)
+        { 
+            
+            if(CurrentToken.Type==TokenTypes.ASSIGN_DIV){
+                Process((TokenTypes)CurrentToken.Type,$" \" equal\" sign to declare variable. Col {Lexer.Pos-CurrentToken.Value.ToString().Length}");
+                AST sumando=new BinaryOperator(node,new Token(TokenTypes.FLOAT_DIV,"/"),Compounds());
+                return new Assign((Var)node,token,sumando);
+            }
+            
+            if(CurrentToken.Type==TokenTypes.ASSIGN_MUL){
+                Process((TokenTypes)CurrentToken.Type,$" \" equal\" sign to declare variable. Col {Lexer.Pos-CurrentToken.Value.ToString().Length}");
+                AST sumando=new BinaryOperator((Var)node,new Token(TokenTypes.MULT,"*"),Compounds());
+                return new Assign((Var)node,token,sumando);
+            }
+            
+            if(CurrentToken.Type==TokenTypes.ASSIGN_PLUS){
+                Process((TokenTypes)CurrentToken.Type,$" \" equal\" sign to declare variable. Col {Lexer.Pos-CurrentToken.Value.ToString().Length}");
+                AST sumando=new BinaryOperator((Var)node,new Token(TokenTypes.PLUS,"+"),Compounds());
+                return new Assign((Var)node,token,sumando);
+            }
 
+            if(CurrentToken.Type==TokenTypes.ASSIGN_MINUS){
+                Process((TokenTypes)CurrentToken.Type,$" \" equal\" sign to declare variable. Col {Lexer.Pos-CurrentToken.Value.ToString().Length}");
+                AST sumando=new BinaryOperator((Var)node,new Token(TokenTypes.MINUS,"-"),Compounds());
+                return new Assign((Var)node,token,sumando);
+            }
+            
+            if(CurrentToken.Type==TokenTypes.ASSIGN_MOD){
+                Process((TokenTypes)CurrentToken.Type,$" \" equal\" sign to declare variable. Col {Lexer.Pos-CurrentToken.Value.ToString().Length}");
+                AST sumando=new BinaryOperator((Var)node,new Token(TokenTypes.MOD,"%"),Compounds());
+                return new Assign((Var)node,token,sumando);
+            }
+            
+            
+        }
+        
+        
         return new Assign((Var)node, token, Compounds());
     }
 // metodo para condicionales 

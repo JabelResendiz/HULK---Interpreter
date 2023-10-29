@@ -64,6 +64,7 @@ Welcome to the HULK lenguage. What would you like to do?
         WriteLine("Press any key to exit ...");
         
         ReadKey(true);
+        ResetColor();
         Environment.Exit(0);
     }
 

@@ -12,7 +12,7 @@ using static System.Console;
         public static Dictionary<string,AST> Functiones= new Dictionary<string, AST>();
         public Principal(){
             
-           
+        
            WriteLine("PRESS ENTER OR ESCAPE FOR SOME FUNCTIONALITY");
             while(true)
             {
@@ -25,10 +25,13 @@ using static System.Console;
                     if(key==ConsoleKey.Enter)
                     {   
 
-                        Write(">");
+                        Write(">>");
                         Text=ReadLine();
                         try{
                             Method();
+                        }
+                        catch(StackOverflowException ex){
+                            WriteLine("RecursionError: maximum recursion depth exceeded");
                         }
                         catch(Exception ex){
                             var g= ForegroundColor;

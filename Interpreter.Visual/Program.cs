@@ -6,7 +6,7 @@ namespace InterpreterDyZ
     {
         public static void Main(string[] args)
         {
-
+            
         do
         {   
             Game myGame= new Game();

@@ -2,6 +2,7 @@ namespace InterpreterDyZ;
 
 public class Interpreter : NodeVisitor
 {
+    private double recursiveCount;
     private Parser? Parser;
     public Dictionary<string, object> Scope;// variables declaradas con let (no puede ser global en todo el programa)
     //public Dictionary<string,AST>Function= new Dictionary<string, AST>();
@@ -88,6 +89,11 @@ public class Interpreter : NodeVisitor
 // metodo evaluador para llamadas de funciones
     public override object VisitCallFunction(CallFUNCTION node,Dictionary<string,object>Scope)
     {
+        recursiveCount+=1;
+        if(recursiveCount>=300){
+            Console.WriteLine("RecursionError: maximum recursion depth exceeded");
+            throw new Exception();
+        }
           if(Principal.Functiones.ContainsKey(node.name)){
             int i=0;
             
@@ -99,7 +105,12 @@ public class Interpreter : NodeVisitor
             
             foreach(KeyValuePair<string,object> item in local)
             {
-                local[item.Key]=Visit(node.arg[i],Scope);
+                object g=Visit(node.arg[i],Scope);
+                if(g is null){
+                    SemanticError($"Empty args of the \"{node.name} \" function have been detected");
+                    break;
+                }
+                local[item.Key]=g;
                 i+=1;
                 
             }
@@ -130,6 +141,8 @@ public class Interpreter : NodeVisitor
         object left = Visit(node.Left,Scope);
         object right = Visit(node.Right,Scope);
 
+        if(left is null || right is null)
+            SemanticError("Empty expression have been detected");
         // si los object left and right no son del mismo tipo salta una excepcion
        
 
@@ -186,7 +199,7 @@ public class Interpreter : NodeVisitor
                     SemanticError($"Operator \"/ \" cannot be used between not \"{left.GetType()}\" and \"{right.GetType()}\"");
                 }
                 if(Convert.ToDouble(right)==0){
-                    SemanticError("La divsion por 0 no esta definida");
+                    SemanticError("Division by constant 0 is not defined");
                 }
                 result = Convert.ToDouble(left) / Convert.ToDouble(right);
                 
@@ -225,6 +238,9 @@ public class Interpreter : NodeVisitor
                     if(left is string || left is bool){
                         SemanticError($"Operator \"== \" cannot be used between not \"{left.GetType()}\" and \"{right.GetType()}\"");
                     }
+                    if(right is string || right is bool){
+                        SemanticError($"Operator \"== \" cannot be used between not \"{left.GetType()}\" and \"{right.GetType()}\"");
+                    }
                     else{
                         result =Convert.ToDouble(left) == Convert.ToDouble(right);
                     }
@@ -240,6 +256,9 @@ public class Interpreter : NodeVisitor
                     result = Convert.ToSingle(left) != Convert.ToSingle (right);
                 else{
                     if(left is string || left is bool){
+                        SemanticError($"Operator \"!= \" cannot be used between not \"{left.GetType()}\" and \"{right.GetType()}\"");
+                    }
+                    if(right is string || right is bool){
                         SemanticError($"Operator \"!= \" cannot be used between not \"{left.GetType()}\" and \"{right.GetType()}\"");
                     }
                     else{
@@ -286,15 +305,25 @@ public class Interpreter : NodeVisitor
             
             case TokenTypes.AND:
 
-                result = (bool)Visit(node.Left,Scope) && (bool)Visit(node.Right,Scope);
-                
+                object nodeLeftBool=Visit(node.Left,Scope);
+                object nodeRightBool=Visit(node.Right,Scope);
+                if( nodeLeftBool is bool && nodeRightBool is bool)
+                    result = (bool)nodeLeftBool && (bool)nodeRightBool;
+                else
+                    SemanticError($"{((nodeLeftBool is bool)? nodeRightBool : nodeLeftBool)} is not a boolean expression");
                 break;
             
             case TokenTypes.OR:
 
-                result = (bool)Visit(node.Left,Scope) || (bool)Visit(node.Right,Scope);
-                
+                object nodeLeftBool2=Visit(node.Left,Scope);
+                object nodeRightBool2=Visit(node.Right,Scope);
+                if( nodeLeftBool2 is bool && nodeRightBool2 is bool)
+                    result = (bool)nodeLeftBool2 || (bool)nodeRightBool2;
+                else
+                    SemanticError($"{((nodeLeftBool2 is bool)? nodeRightBool2 : nodeLeftBool2)} is not a boolean expression");
                 break;
+            
+                
             
         }
 
@@ -343,12 +372,13 @@ public class Interpreter : NodeVisitor
     {
         foreach (var item in node.Commands)
         {
+            recursiveCount=0;
             object output =Visit(item,Scope);
             Console.WriteLine((output is string)?(string)output: (output is bool)? (bool)output : Convert.ToDouble(output));
             Scope.Clear();
 
         }
-
+        
         return 0;
     }
 

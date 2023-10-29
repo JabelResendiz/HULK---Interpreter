@@ -370,6 +370,10 @@ public class Lexer
             pos+=1;
         }
         if(pos>= Text.Length-1)return false;
+        if(Text[pos]=='+' || Text[pos]=='-' || Text[pos]=='*' || Text[pos]=='/' || Text[pos]=='%'){
+            pos+=1;
+            return Text[pos]=='=';
+        }
         return  (Text[pos]== '=') &&(Text[pos+1]!='=');
     }
    
@@ -382,6 +386,7 @@ public class Lexer
         while(CurrentChar!= null && pos< Text.Length &&  char.IsWhiteSpace(Text[pos])){
             pos+=1;
         }
+        if(pos==Text.Length)return true;
         return  Text[pos]== '(';
     }
 }
