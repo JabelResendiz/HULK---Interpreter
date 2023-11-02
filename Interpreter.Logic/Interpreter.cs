@@ -142,7 +142,7 @@ public class Interpreter : NodeVisitor
         object right = Visit(node.Right,Scope);
 
         if(left is null || right is null)
-            SemanticError("Empty expression have been detected");
+            SemanticError($"{((left is null)?"Left":"Right")} node has not been detected");
         // si los object left and right no son del mismo tipo salta una excepcion
        
 

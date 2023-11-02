@@ -319,10 +319,11 @@ public class Lexer
                     (char)CurrentChar!=')' && !Char.IsWhiteSpace((char)CurrentChar)
                     && (char)CurrentChar!='=' && (char)CurrentChar!=',' &&
                     (char)CurrentChar!='&' && (char)CurrentChar!='|' && (char)CurrentChar!='<'&&
-                    (char)CurrentChar!='>' && (char)CurrentChar!='!' && (char)CurrentChar!=';' ){
+                    (char)CurrentChar!='>' && (char)CurrentChar!='!' && (char)CurrentChar!=';' && (char)CurrentChar!='@'){
                 value+=CurrentChar;
                 variable+=1;
                 Next();
+                if(CurrentChar ==null)break;
             }
             if(variable!=0)ErrorLexico($"\" {value} \" is not valid token. Col {Pos-value.Length}");
         }
