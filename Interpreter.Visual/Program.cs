@@ -12,7 +12,7 @@ namespace InterpreterDyZ
             Game myGame= new Game();
             myGame.Start();
         
-            Principal s= new Principal();
+            Principal.Main();
             
             ResetColor();
 

@@ -3,14 +3,14 @@ using InterpreterDyZ;
 using static System.Console;
 
     //Dictionary<string,AST>functional= new Dictionary<string, AST>();
-    public class Principal{
+    public static class Principal{
         
-        Lexer lexer;
-        Parser parser;
-        string Text;
-        Interpreter interpreter;
+        static Lexer lexer;
+        static Parser parser;
+        static string Text;
+        static Interpreter interpreter;
         public static Dictionary<string,AST> Functiones= new Dictionary<string, AST>();
-        public Principal(){
+        public static void Main(){
             
         
            WriteLine("PRESS ENTER OR ESCAPE FOR SOME FUNCTIONALITY");
@@ -53,7 +53,7 @@ using static System.Console;
         } 
            
         
-        public void Method()
+        public static void Method()
         {
     
  
