@@ -2,6 +2,8 @@ using System.Reflection.Emit;
 using InterpreterDyZ;
 using static System.Console;
 
+// archivo innecesario aqui
+
     //Dictionary<string,AST>functional= new Dictionary<string, AST>();
     public class Principal{
         
