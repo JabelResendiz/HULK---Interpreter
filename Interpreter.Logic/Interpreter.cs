@@ -41,7 +41,7 @@ public class Interpreter : NodeVisitor
                 SemanticError("The args of logarithm function is a double variable");
             }
 
-            if(Convert.ToSingle(tree)<=0){
+            if(Convert.ToDouble(tree)<=0){
                 SemanticError("The arg of the logarithm function is less than 0");
         }
 
@@ -52,20 +52,20 @@ public class Interpreter : NodeVisitor
                 SemanticError("The base of logarithm is a double variable");
             }
 
-            if(Convert.ToSingle(tree2)<=0 || Convert.ToSingle(tree2)==1 ){
+            if(Convert.ToDouble(tree2)<=0 || Convert.ToDouble(tree2)==1 ){
                 SemanticError("Logarithm to base less 0 or 1 is not defined");
             }
 
-            return Math.Log(Convert.ToSingle(tree))/Math.Log(Convert.ToSingle(tree2));
+            return Math.Log(Convert.ToDouble(tree))/Math.Log(Convert.ToDouble(tree2));
         }
-        return Math.Log(Convert.ToSingle(tree));
+        return Math.Log(Convert.ToDouble(tree));
     }
     public override object VisitSen(Sen node, Dictionary<string,object> Scope)
     {
         if(node.Statement is null){
             SemanticError("The function \"sen\" take one arg");
         }
-        return Math.Sin(Convert.ToSingle(Visit(node.Statement,Scope)));
+        return Math.Sin(Convert.ToDouble(Visit(node.Statement,Scope)));
     }
 
 
@@ -76,7 +76,7 @@ public class Interpreter : NodeVisitor
             SemanticError("The function \"cos\" take one arg");
         }
         //Console.WriteLine(Math.Cos(Convert.ToSingle(Visit(node.Statement,Scope))));
-        return Math.Cos(Convert.ToSingle(Visit(node.Statement,Scope)));   
+        return Math.Cos(Convert.ToDouble(Visit(node.Statement,Scope)));   
     }
     public override object VisitFunctional(FUNCTIONAL node,Dictionary<string,object>Scope)
     {
@@ -396,7 +396,7 @@ public class Interpreter : NodeVisitor
         
         object f = Visit(node.instruccion,cloneScope);
         node.Scope= new Dictionary<string, object>(cloneScope);
-        return (f is string)?(string)f:(f is bool)?(bool)f:Convert.ToSingle(f);
+        return (f is string)?(string)f:(f is bool)?(bool)f:Convert.ToDouble(f);
     }
     
     public override object VisitAssign(Assign node,Dictionary<string,object>Scope)
