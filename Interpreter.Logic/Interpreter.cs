@@ -4,7 +4,7 @@ public class Interpreter : NodeVisitor
 {
     private double recursiveCount;
     private Parser? Parser;
-    public Dictionary<string, object> Scope;// variables declaradas con let (no puede ser global en todo el programa)
+    public Dictionary<string, object> Scope2;// variables declaradas con let (no puede ser global en todo el programa)
     //public Dictionary<string,AST>Function= new Dictionary<string, AST>();
 
     
@@ -13,7 +13,7 @@ public class Interpreter : NodeVisitor
     public Interpreter(Parser parser)
     {
         Parser = parser;
-        Scope = new Dictionary<string, object>();// esto es una variable local
+        Scope2 = new Dictionary<string, object>();// esto es una variable local
         //Function = new Dictionary<string,AST>();
         
     }
@@ -384,16 +384,18 @@ public class Interpreter : NodeVisitor
 
     public override object VisitDeclarations(Declarations node,Dictionary<string,object>Scope)
     {   
-
-        node.Scope= new Dictionary<string, object>(Scope);
+        
+       
+        Dictionary <string,object> cloneScope= new Dictionary<string, object>(Scope);
+        //cloneScope= new Dictionary<string, object>(Scope);
         
         foreach (var item in node.Commands)
         {
-            Visit(item,node.Scope);
+            Visit(item,cloneScope);
         }
         
-        object f = Visit(node.instruccion,node.Scope);
-        node.Scope.Clear();
+        object f = Visit(node.instruccion,cloneScope);
+        node.Scope= new Dictionary<string, object>(cloneScope);
         return (f is string)?(string)f:(f is bool)?(bool)f:Convert.ToSingle(f);
     }
     
@@ -417,7 +419,7 @@ public class Interpreter : NodeVisitor
 
         }
 
-        if ((bool)Visit(node.Compound,Scope))
+        if ((bool)condition)
 
             return Visit(node.StatementList,Scope);
         
@@ -429,9 +431,9 @@ public class Interpreter : NodeVisitor
     public override object VisitCicle(Cicle node)
     {
         
-        while ((bool)Visit(node.Compound,Scope))
+        while ((bool)Visit(node.Compound,Scope2))
         {
-            Visit(node.StatementList,Scope);
+            Visit(node.StatementList,Scope2);
         }
 
         return 0;
@@ -508,7 +510,7 @@ public class Interpreter : NodeVisitor
 
             return -1;
         
-        return Visit(tree,Scope);
+        return Visit(tree,Scope2);
     }
     #endregion
 }

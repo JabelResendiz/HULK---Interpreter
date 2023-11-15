@@ -111,7 +111,7 @@ public class Declarations : AST
         Scope= new Dictionary<string, object>();
     }
 
-    // una propiedad para llenar el Scope local de cada Declaration
+    
 }
 
 public class Assign : AST

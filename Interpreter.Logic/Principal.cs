@@ -12,7 +12,7 @@ using static System.Console;
         public static Dictionary<string,AST> Functiones= new Dictionary<string, AST>();
         public static void Main(){
             
-        
+            
            WriteLine("PRESS ENTER OR ESCAPE FOR SOME FUNCTIONALITY");
             while(true)
             {
