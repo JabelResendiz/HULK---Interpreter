@@ -49,7 +49,7 @@ public class Parser
     // realcionado con el metodo GetNextToken() de la clase Lexer
     private void Process(TokenTypes type, string msg)
     {
-        Console.WriteLine($"{CurrentToken.Show()} {type}");
+        //Console.WriteLine($"{CurrentToken.Show()} {type}");
 
         if(CurrentToken.Type == type)
 
