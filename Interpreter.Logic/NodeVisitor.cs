@@ -2,8 +2,7 @@ namespace InterpreterDyZ;
 
 public abstract class NodeVisitor // las clases hija pueden modificar sus metodos abstractos
 {
-    //public NodeVisitor():base(){}
-    protected delegate int DelegateMethod(AST node);// metodo protegido
+    
 
     protected object Visit(AST node,Dictionary<string,object> some)// identifica que clase es
     {

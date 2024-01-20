@@ -16,6 +16,7 @@ public class Lexer
         CurrentChar = text[Pos];
         //key = new ReservateKeywords();
     }
+    
 
     #region 1-LexicalError 
     private void ErrorLexico(string error)

@@ -5,16 +5,12 @@ public class Interpreter : NodeVisitor
     private double recursiveCount;
     private Parser? Parser;
     public Dictionary<string, object> Scope2;// variables declaradas con let (no puede ser global en todo el programa)
-    //public Dictionary<string,AST>Function= new Dictionary<string, AST>();
 
-    
-    //public ReservateKeywords reserved= new ReservateKeywords();
-    //public Principal principal= new Principal();
     public Interpreter(Parser parser)
     {
         Parser = parser;
         Scope2 = new Dictionary<string, object>();// esto es una variable local
-        //Function = new Dictionary<string,AST>();
+        
         
     }
 

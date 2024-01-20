@@ -1,18 +1,11 @@
-using System.ComponentModel.Design;
-using System.Linq.Expressions;
+
 namespace InterpreterDyZ;
 
 
-// Abstract syntac tree class 
+
 public class AST
 {
-   /* private Dictionary<string,object>map;
-    public void AccederDiccionario(Dictionary<string,object>Scope)
-    {
-        map= Interpreter.Scope;
-        Interpreter.Scope= Scope;
-    }
-    */
+   
 }
 
 public class BinaryOperator : AST
@@ -191,7 +184,6 @@ public class FUNCTIONAL:AST
     public string name;
     public Dictionary<string,object>argumentos;
     public AST Statement;
-    //public List<AST>arg;
 
     public FUNCTIONAL(Token names,Dictionary<string,object>argumentos,AST Statement){
         name=(string)names.Value;
@@ -199,12 +191,7 @@ public class FUNCTIONAL:AST
         this.Statement=Statement;
     }
 
-    
-   /* public FUNCTIONAL(Token names,List<AST>arg){
-        name=(string)names.Value;
-        this.arg=arg;
-    }
-    */
+  
 }
 public class CallFUNCTION:AST
 {
@@ -214,9 +201,7 @@ public class CallFUNCTION:AST
         name= (string)names.Value;
         this.arg=arg;
     }
-    
-    
-    
+  
 }
 public class Sen:AST
 {
@@ -248,30 +233,11 @@ public class LOG:AST{
         this.Statement=Statement;
     }
 }
-/*
-public class CallFUNCTION:FUNCTIONAL
-{
-    public string name;
-    public List<object>arg;
-    public CallFUNCTION(Token names,List<object>arg):base(names,null,null){
-        //name=(string)names.Value;
-        this.arg=arg;
-        this.Statement=Statement;
-        int i=0;
-     /*   foreach(KeyValuePair<string,object> item in argumentos)
-        {
-            argumentos[item.Key]=arg[i];
-            i+=1;
-        }
-    
-    }
 
-}
-*/
 public class Cicle : AST
 {
-    public AST Compound;// expresion a evaluar
-    public AST StatementList;// expresion que constituye una nueva lista de instrucciones
+    public AST Compound;
+    public AST StatementList;
 
     public Cicle(AST compound, AST statements)
     {

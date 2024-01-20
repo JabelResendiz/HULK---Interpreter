@@ -5,10 +5,10 @@ using static System.Console;
     //Dictionary<string,AST>functional= new Dictionary<string, AST>();
     public static class Principal{
         
-        static Lexer lexer;
-        static Parser parser;
-        static string Text;
-        static Interpreter interpreter;
+        static Lexer? lexer;
+        static Parser? parser;
+        static string? Text;
+        static Interpreter? interpreter;
         public static Dictionary<string,AST> Functiones= new Dictionary<string, AST>();
         public static void Main(){
             
